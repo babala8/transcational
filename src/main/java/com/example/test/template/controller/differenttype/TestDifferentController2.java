@@ -2,6 +2,7 @@ package com.example.test.template.controller.differenttype;
 
 
 import com.example.test.template.api.SaveService;
+import com.example.test.template.api.TestService;
 import com.example.test.template.entity.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +19,8 @@ public class TestDifferentController2 {
 
     @Autowired
     SaveService saveService;
+    @Autowired
+    TestService testService;
 
     @GetMapping("/test2")
     public String test() {
@@ -37,15 +40,8 @@ public class TestDifferentController2 {
         person.setAge(11);
         person.setName("11");
         saveService.save(person);
-        testB();
+        testService.testB();
 //        int i = 1/0; // testA方法异常
     }
 
-    public void testB() {
-        Person person = new Person();
-        person.setAge(22);
-        person.setName("22");
-        saveService.save(person);
-        int i = 1/0; // testB方法异常
-    }
 }

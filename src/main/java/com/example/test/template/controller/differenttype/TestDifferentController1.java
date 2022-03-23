@@ -2,11 +2,10 @@ package com.example.test.template.controller.differenttype;
 
 
 import com.example.test.template.api.SaveService;
+import com.example.test.template.api.TestService;
 import com.example.test.template.entity.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.transaction.annotation.Propagation;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -18,6 +17,8 @@ public class TestDifferentController1 {
 
     @Autowired
     SaveService saveService;
+    @Autowired
+    TestService testService;
 
     @GetMapping("/test1")
     public String test() {
@@ -36,15 +37,7 @@ public class TestDifferentController1 {
         person.setAge(11);
         person.setName("11");
         saveService.save(person);
-        testB();
+        testService.testB();
         int i = 1/0; // testA方法异常
-    }
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
-    public void testB() {
-        Person person = new Person();
-        person.setAge(22);
-        person.setName("22");
-        saveService.save(person);
-//        int i = 1/0; // testB方法异常
     }
 }
