@@ -5,6 +5,8 @@ import com.example.test.template.api.SaveService;
 import com.example.test.template.entity.Person;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +20,8 @@ public class TestSameController2 {
 
     @Autowired
     SaveService saveService;
+    @Lazy
+    TestSameController2 testSameController2;
 
     @GetMapping("/test2")
     public String test() {
@@ -37,7 +41,7 @@ public class TestSameController2 {
         person.setAge(11);
         person.setName("11");
         saveService.save(person);
-        testB();
+        testSameController2.testB();
 //        int i = 1/0; // testA方法异常
     }
 
