@@ -38,7 +38,7 @@ public class TestSameController2 {
         person.setName("11");
         saveService.save(person);
         testB();
-        int i = 1/0; // testA方法异常
+//        int i = 1/0; // testA方法异常
     }
 
     public void testB() {
@@ -46,6 +46,6 @@ public class TestSameController2 {
         person.setAge(22);
         person.setName("22");
         saveService.save(person);
-//        int i = 1/0; // testB方法异常
+        int i = 1/0; // testB方法异常
     }
 }
