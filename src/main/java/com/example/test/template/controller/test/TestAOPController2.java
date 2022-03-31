@@ -52,7 +52,7 @@ public class TestAOPController2 {
      * A()方法和B()方法同类：
      * 1.方法A上面有REQUIRED的@Transactional注解
      * 1.1 A()方法异常，A()和B()均回滚，数据库不存在记录
-     * 1.2 B()方法异常，A()和B()均不回滚，数据库存在记录
+     * 1.2 B()方法异常，A()和B()均回滚，数据库不存在记录
      */
     @GetMapping("/testSelf")
     @Transactional(propagation = Propagation.REQUIRED,rollbackFor = Exception.class)
