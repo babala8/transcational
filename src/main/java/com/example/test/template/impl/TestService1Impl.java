@@ -8,14 +8,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-@Service("testService")
-public class TestServiceImpl implements TestService {
+@Service("testService1111")
+public class TestService1Impl implements TestService {
 
     @Autowired
     SaveService saveService;
 
     @Override
-    @Transactional(propagation = Propagation.REQUIRES_NEW,rollbackFor = Exception.class)
     public void testB() {
         Person person = new Person();
         person.setAge(22);

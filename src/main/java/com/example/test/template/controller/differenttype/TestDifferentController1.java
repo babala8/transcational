@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 @RestController
 @RequestMapping("test1")
 @Slf4j
@@ -17,27 +19,24 @@ public class TestDifferentController1 {
 
     @Autowired
     SaveService saveService;
-    @Autowired
+    @Resource(name = "testService")
     TestService testService;
-
-    @GetMapping("/test1")
-    public String test() {
-        testA();
-        return "success";
-    }
 
     /**
      * A()方法和B()方法不同类：
      * 1.方法B上面有REQUIRES_NEW的@Transactional注解
-     * 1.1 A()方法异常，A()和B()均不回滚，数据库存在记录
-     * 1.2 B()方法异常，A()和B()均不回滚，数据库存在记录
+     * 1.1 A()方法异常，A()和B()均不回滚，数据库存在2条记录
+     * 1.2 B()方法异常，B()回滚,A()不回滚，数据库存在1条记录
      */
-    public void testA() {
+    @GetMapping("/test1")
+    public String testA() {
         Person person = new Person();
         person.setAge(11);
         person.setName("11");
         saveService.save(person);
         testService.testB();
-        int i = 1/0; // testA方法异常
+//        int i = 1/0; // testA方法异常
+        return "success";
     }
+
 }
